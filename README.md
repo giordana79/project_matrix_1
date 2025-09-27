@@ -1,4 +1,4 @@
-# -giordana79-project_matrix
+# project_matrix
 
 Un esempio completo di una web app Python che gestisce 4 agenti, utilizzando LLM (Large Language Model), Celery, Redis e Matrix. L'app è composta da diverse parti: il server Flask, gli agenti Celery, la gestione di Redis per la coda dei task, e l'integrazione con Matrix.
 
@@ -163,7 +163,7 @@ Creazione delle immagini Docker con *docker-compose build*.
 Avvio i servizi con *docker-compose up*.
 Le API saranno accessibili su http://localhost:5001.
 
-### Ogni agente viene invocato tramite una richiesta POST. Gli agenti possono eseguire compiti separati (per es. elaborazione del linguaggio naturale usando un LLM o qualsiasi altra logica personalizzata) e possono interagire con Matrix tramite i task Celery. ###
+Ogni agente viene invocato tramite una richiesta POST. Gli agenti possono eseguire compiti separati (per es. elaborazione del linguaggio naturale usando un LLM o qualsiasi altra logica personalizzata) e possono interagire con Matrix tramite i task Celery. 
 
 # 1. Interazione tra Agenti
 Gli agenti possono comunicare tra loro utilizzando Redis come un sistema di messaggistica. Quando un agente termina un task, può inviare i risultati agli altri agenti per una seconda fase di elaborazione. In questo caso, direttamente le code Celery per inviare messaggi tra gli agenti.
@@ -289,7 +289,7 @@ http://localhost:5001/run_agent2
 curl -X POST http://localhost:5001/run_agent1 -H "Content-Type: application/json" -d '{"data": "Qual è la capitale della Francia?"}'
 Questo avvierà il task di Agent1, che utilizzerà OpenAI per rispondere alla domanda, e invierà i risultati agli altri agenti per l'elaborazione.
 
-##  ----Alternativa al curl in powershell---- 
+### Alternativa al curl in powershell
 
 $body = @{ data = "che giorno è oggi" } | ConvertTo-Json -Compress
 Invoke-RestMethod -Uri "http://localhost:5001/run_agent2" -Method Post -Headers @{"Content-Type"="application/json"} -Body $body
